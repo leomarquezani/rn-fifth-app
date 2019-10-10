@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import Colors from '../constants/Colors';
 import * as placesActions from '../store/places-action';
+import ImagePicker from '../components/ImagePicker'
 
 const NewPlaceScreen = props => {
 
   const dispatch = useDispatch();
 
   const [titleValue, setTitleValue] = useState('');
+  const [selectedImage, setSelectedImage] = useState();
 
   const titleChangeHandler = (text) => {
     setTitleValue(text);
@@ -18,6 +20,10 @@ const NewPlaceScreen = props => {
   const savePlacehandler = () => {
     dispatch(placesActions.addPlace(titleValue));
     props.navigation.goBack();
+  };
+
+  const imageTakenHandler = imagePath => {
+    setSelectedImage(imagePath);
   };
 
   return (
@@ -29,6 +35,7 @@ const NewPlaceScreen = props => {
           onChangeText={titleChangeHandler}
           title={titleValue}
         />
+        <ImagePicker onImageTaken={imageTakenHandler} />
         <Button 
           title="Save Place" 
           color={Colors.primary} 
