@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 const ImagePicker = props => {
   const [pickedImage, setPickedImage] = useState();
   const verifyPermissions = async () => {
-    const result = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
+    const result = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
     
     if (result.status !== 'granted') {
       Alert.alert('No permission', 'You need to grant permission for the camera', [
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15
   },
-  imagePicker: {
+  imagePreview: {
     width: '100%',
     height: 200,
     marginBottom: 10,
